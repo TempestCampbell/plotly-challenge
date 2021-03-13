@@ -1,10 +1,11 @@
 //Read in the data
-d3.json("samples.json").then((data) => {
+d3.json("./StarterCode/samples.json").then((data) => {
   // Grab values from the response json object to build the plots
   var Selector = d3.select("#selDataset");
   data.names.forEach((element) => {
     Selector.append("option").text(element).property("value", element);
   });
+  console.log("im running");
   var name = data.names[0];
   charts(name);
   DemographicMetadata(name);
@@ -15,7 +16,7 @@ function optionChanged(newName) {
 
 //Build Function to display the sample metadata, i.e., an individual's demographic information.
 function DemographicMetadata(newName) {
-  d3.json("samples.json").then((data) => {
+  d3.json("./StarterCode/samples.json").then((data) => {
     // Grab values from the response json object to build the plots
     var meta = data.metadata;
     meta = meta.filter((Filt) => Filt.id == newName)[0];
@@ -33,7 +34,7 @@ function DemographicMetadata(newName) {
 //Use otu_labels as the hovertext for the chart
 
 function charts(newName) {
-  d3.json("samples.json").then((data) => {
+  d3.json("./StarterCode/samples.json").then((data) => {
     var info = data.samples.filter((sampleObj) => sampleObj.id == newName)[0];
     var otu_ids = info.otu_ids;
     var otu_labels = info.otu_labels;
